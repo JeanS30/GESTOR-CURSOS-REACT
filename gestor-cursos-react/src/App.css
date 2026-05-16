@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #1f2937;
+}
+
+.app {
+  width: min(1100px, 95%);
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.header {
+  background: #111827;
+  color: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+}
+
+.header p {
+  margin: 0;
+}
+
+.summary {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary p {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.search-container {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.search-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.course-card {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.course-card h2 {
+  font-size: 18px;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+.course-card p {
+  line-height: 1.5;
+}
+
+.course-card small {
+  display: block;
+  margin-bottom: 12px;
+  color: #475569;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.btn.favorite {
+  background: #dc2626;
+}
+
+.btn.favorite:hover {
+  background: #b91c1c;
+}
+
+.message {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.error {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.error button {
+  padding: 8px 12px;
+  border: none;
+  background: #991b1b;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
