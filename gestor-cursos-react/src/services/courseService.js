@@ -11,6 +11,6 @@ export const getCourses = async () => {
         }));
     } catch (error) {
         console.error("Error al obtener los cursos:", error);
-        throw new Error("No fue posible cargar los cursos.");
+        throw new Error("No fue posible cargar los cursos.", { cause: error });
     }
 }; 

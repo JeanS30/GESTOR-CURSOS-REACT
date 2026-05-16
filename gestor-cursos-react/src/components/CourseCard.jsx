@@ -1,4 +1,6 @@
 import { sanitizeText } from "../utils/sanitize";
+import PropTypes from "prop-types";
+
 const CourseCard = ({ course, isFavorite, onToggleFavorite }) => {
 
     const safeTitle = sanitizeText(course.title);
@@ -21,6 +23,17 @@ const CourseCard = ({ course, isFavorite, onToggleFavorite }) => {
             </button>
         </article>
     );
+};
+
+CourseCard.propTypes = {
+    course: PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        teacherId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    }).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
 };
 
 export default CourseCard;

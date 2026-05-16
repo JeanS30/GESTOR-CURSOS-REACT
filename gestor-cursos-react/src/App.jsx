@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
@@ -11,7 +11,7 @@ function App() {
   const [favorites, setFavorites] = useLocalStorage("favoriteCourses", []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const loadCourses = async () => {
+  const loadCourses = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -22,10 +22,15 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
-  useEffect(() => {
-    loadCourses();
   }, []);
+  useEffect(() => {
+    const init = async () => {
+      await loadCourses();
+    };
+
+    void init();
+  }, [loadCourses]);
+
   const filteredCourses = useMemo(() => {
     const normalizedSearch = searchTerm.toLowerCase().trim();
     return courses.filter((course) =>

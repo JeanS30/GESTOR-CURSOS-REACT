@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import CourseCard from "./CourseCard";
 
 const CourseList = ({ courses, favorites, onToggleFavorite }) => {
@@ -22,4 +23,22 @@ const CourseList = ({ courses, favorites, onToggleFavorite }) => {
         </section>
     );
 };
+
+CourseList.propTypes = {
+    courses: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            teacherId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        })
+    ).isRequired,
+    favorites: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        })
+    ).isRequired,
+    onToggleFavorite: PropTypes.func.isRequired,
+};
+
 export default CourseList; 
