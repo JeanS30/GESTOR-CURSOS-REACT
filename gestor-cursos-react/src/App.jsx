@@ -2,12 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
+import TeacherFilter from "./components/TeacherFilter";
 import CourseList from "./components/CourseList";
 import { getCourses } from "./services/courseService";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useDarkMode } from "./hooks/useDarkMode";
 function App() {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const [courses, setCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTeacher, setSelectedTeacher] = useState("");
   const [favorites, setFavorites] = useLocalStorage("favoriteCourses", []);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -31,12 +35,34 @@ function App() {
     void init();
   }, [loadCourses]);
 
+  const availableTeachers = useMemo(() => {
+    const teacherSet = new Set(courses.map((course) => course.teacherId));
+    return Array.from(teacherSet).sort((a, b) => a - b);
+  }, [courses]);
+
+  const favoritesByTeacher = useMemo(() => {
+    const count = {};
+    
+    const courseMap = new Map(courses.map((course) => [course.id, course]));
+    
+    availableTeachers.forEach((teacherId) => {
+      count[teacherId] = favorites.reduce((acc, fav) => {
+        const course = courseMap.get(fav.id);
+        return course?.teacherId === teacherId ? acc + 1 : acc;
+      }, 0);
+    });
+    
+    return count;
+  }, [availableTeachers, favorites, courses]);
+
   const filteredCourses = useMemo(() => {
     const normalizedSearch = searchTerm.toLowerCase().trim();
-    return courses.filter((course) =>
-      course.title.toLowerCase().includes(normalizedSearch)
-    );
-  }, [courses, searchTerm]);
+    return courses.filter((course) => {
+      const matchesSearch = course.title.toLowerCase().includes(normalizedSearch);
+      const matchesTeacher = selectedTeacher === "" || course.teacherId.toString() === selectedTeacher;
+      return matchesSearch && matchesTeacher;
+    });
+  }, [courses, searchTerm, selectedTeacher]);
 
 
   const handleToggleFavorite = (course) => {
@@ -54,7 +80,7 @@ function App() {
 
   return (
     <main className="app">
-      <Header />
+      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
 
       <section className="summary">
         <p>Total de cursos: {courses.length}</p>
@@ -62,6 +88,13 @@ function App() {
       </section>
 
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm}
+      />
+
+      <TeacherFilter 
+        teachers={availableTeachers}
+        selectedTeacher={selectedTeacher}
+        onTeacherChange={setSelectedTeacher}
+        favoritesByTeacher={favoritesByTeacher}
       />
 
       {loading && <p className="message">Cargando cursos...</p>}

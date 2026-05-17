@@ -7,6 +7,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #f4f6f8;
   color: #1f2937;
+  transition: background 0.3s, color 0.3s;
+}
+
+html.dark-mode body {
+  background: #111827;
+  color: #f9fafb;
 }
 
 .app {
@@ -21,6 +27,30 @@ body {
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.dark-mode-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.dark-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .header h1 {
@@ -39,9 +69,15 @@ body {
 
 .summary p {
   background: white;
+  color: #1f2937;
   padding: 12px 16px;
   border-radius: 12px;
   font-weight: bold;
+}
+
+html.dark-mode .summary p {
+  background: #1f2937;
+  color: #f9fafb;
 }
 
 .search-container {
@@ -51,10 +87,19 @@ body {
   margin-bottom: 20px;
 }
 
+html.dark-mode .search-container {
+  background: #1f2937;
+}
+
 .search-container label {
   display: block;
   font-weight: bold;
   margin-bottom: 8px;
+  color: #1f2937;
+}
+
+html.dark-mode .search-container label {
+  color: #f9fafb;
 }
 
 .search-container input {
@@ -63,6 +108,57 @@ body {
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 16px;
+  background: white;
+  color: #1f2937;
+}
+
+html.dark-mode .search-container input {
+  background: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.teacher-filter-container {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+html.dark-mode .teacher-filter-container {
+  background: #1f2937;
+}
+
+.teacher-filter-container label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1f2937;
+}
+
+html.dark-mode .teacher-filter-container label {
+  color: #f9fafb;
+}
+
+.teacher-filter-container select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  color: #1f2937;
+  cursor: pointer;
+}
+
+html.dark-mode .teacher-filter-container select {
+  background: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+.teacher-filter-container select:hover {
+  border-color: #9ca3af;
 }
 
 .course-list {
@@ -78,20 +174,39 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
+html.dark-mode .course-card {
+  background: #1f2937;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
 .course-card h2 {
   font-size: 18px;
   margin-top: 0;
   text-transform: capitalize;
+  color: #1f2937;
+}
+
+html.dark-mode .course-card h2 {
+  color: #f9fafb;
 }
 
 .course-card p {
   line-height: 1.5;
+  color: #1f2937;
+}
+
+html.dark-mode .course-card p {
+  color: #d1d5db;
 }
 
 .course-card small {
   display: block;
   margin-bottom: 12px;
   color: #475569;
+}
+
+html.dark-mode .course-card small {
+  color: #9ca3af;
 }
 
 .btn {
@@ -119,8 +234,14 @@ body {
 
 .message {
   background: white;
+  color: #1f2937;
   padding: 16px;
   border-radius: 12px;
+}
+
+html.dark-mode .message {
+  background: #1f2937;
+  color: #f9fafb;
 }
 
 .error {
